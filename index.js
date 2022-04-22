@@ -1,9 +1,9 @@
-function randomIntFromInterval(min, max) {
+const randomIntFromInterval = (min, max) => {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function getStandardDeviation(newMean, newStd){
+const getStandardDeviation = (newMean, newStd) => {
   /// Get STD of abilities
   const seedNumbers = []
   for (let index = 0; index < 12; index++) {
@@ -13,9 +13,8 @@ function getStandardDeviation(newMean, newStd){
   const sum = seedNumbers.reduce((a, c) => a + c, 0)
   const oldMean = sum / seedNumbers.length
   const oldStd = Math.sqrt(
-    seedNumbers
-      .map((x) => Math.pow(x - oldMean, 2))
-      .reduce((a, b) => a + b) / seedNumbers.length
+    seedNumbers.map((x) => Math.pow(x - oldMean, 2)).reduce((a, b) => a + b) /
+      seedNumbers.length
   )
 
   const finalNumbers = []
@@ -27,6 +26,18 @@ function getStandardDeviation(newMean, newStd){
     finalNumbers.push(newAbility)
   }
   return finalNumbers
+}
+
+const scores = (abilityS, abilityW) => {
+  const sigma = (abilityS - abilityW) / 3 > 15 ? (abilityS - abilityW) / 3 : 15
+  const pS = getStandardDeviation(abilityS, sigma)[Math.floor(Math.random() * 12)]
+  const pW = getStandardDeviation(abilityW, sigma)[Math.floor(Math.random() * 12)]
+  const stdDiffs = Math.abs(pS-pW)/sigma
+
+  const pts = stdDiffs > 3 ? 6: stdDiffs > 2 ? 5 : stdDiffs > 1 ? 4 : 3
+
+  console.log(pts)
+  return([pS, pW, pts])
 }
 
 ///1. Set-up classes
@@ -49,9 +60,9 @@ for (let i = 12; i > 0; i--) {
 
 ///2. Initialize team
 
-function createTeam(t) {
+const createTeam = (t) => {
   const team = []
-  team.id = t*100
+  team.id = t * 100
 
   const getAbilities = getStandardDeviation(100, 15)
   /// Create players
@@ -74,40 +85,46 @@ function createTeam(t) {
 ///3.  Create array of Teams
 const teams = []
 
-for (let t = 1; t <= 24; t++) {
+for (let t = 1; t <= 8; t++) {
   teams.push(createTeam(t))
 }
 
 ///4. Create meet
-const team0 = teams[0]
-const team1 = teams[1]
-console.log(`Team ${team0.id} vs Team ${team1.id}`)
 
-const wrestler0 = team0[0]
-const wrestler1 = team1[0]
+const meet = (teamA, teamB) => {
+  console.log(`Team ${teams[teamA].id} vs Team ${teams[teamB].id}`)
+  console.log('====================')
+  for (let w = 1; w <= 1; w++) {
+    const padTens = w < 10 ? '0' : ''
 
-console.log(`Wrestler0: ${wrestler0.id}(${wrestler0.abilityScore}) vs Wrestler1: ${wrestler1.id}(${wrestler1.abilityScore})`)
-console.log()
+    const abilityA = teams[teamA][w - 1].abilityScore
+    const abilityB = teams[teamB][w - 1].abilityScore
 
-let wrestlerS = scoreS = wrestlerW = scoreW = ''
-if(wrestler0.abilityScore > wrestler1.abilityScore) {
-  wrestlerS = wrestler0
-  scoreS = wrestler0.abilityScore
-  wrestlerW = wrestler1.id
-  scoreW= wrestler1.abilityScore
-} else {
-  wrestlerS = wrestler1
-  scoreS = wrestler1.abilityScore
-  wrestlerW = wrestler0.id
-  scoreW = wrestler0.abilityScore
+    let scoreA = scoreB = matchPoints= 0
+
+
+    if (abilityA > abilityB) {
+      const matchScore = scores(abilityA, abilityB)
+      scoreA = matchScore[0]
+      scoreB = matchScore[1]
+      matchPts = scoreA > scoreB ? matchScore[2] : 0
+    } else {
+      const matchScore = scores(abilityB, abilityA)
+      scoreA = matchScore[1]
+      scoreB = matchScore[0]
+      matchPts = scoreA < scoreB ? 0 : matchScore[2]
+    }
+
+    console.log(
+      `Match ${padTens}${w}: Wrestler ${teams[teamA][w - 1].id}(${
+        abilityA
+      }) ==> Scored ${scoreA} vs Wrestler ${teams[teamB][w - 1].id}(${
+        abilityB
+      }) ==> Scored ${scoreB}`
+    )
+  }
 }
 
-const sigma = (scoreS - scoreW)/3
+meet(0,1)
 
-const pS = getStandardDeviation(scoreS, sigma)[Math.floor(Math.random()*12)]
-console.log(`WreaslerS ${wrestlerS.id} Ability(${scoreS}) --> ${pS}`)
 
-const pW = getStandardDeviation(scoreS, sigma)[Math.floor(Math.random()*12)]
-console.log(`wrestlerW ${wrestlerW} Ability(${scoreW}) --> ${pW}`)
-
-console.log(pS > pW)
