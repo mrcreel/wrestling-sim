@@ -1,7 +1,7 @@
 import {
   randomNumber,
   normalizedRandomNumber,
-  generatePlayer
+  generateWrestler
 } from './functions.js'
 
 const wrestlers = []
@@ -9,7 +9,7 @@ let matchResult = []
 
 // Make Test Players
 for (let index = 1; index <= 4; index++) {
-  wrestlers.push(generatePlayer(index))
+  wrestlers.push(generateWrestler(index, 1))
 }
 
 // Test match
