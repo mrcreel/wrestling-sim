@@ -7,7 +7,7 @@ export function randomNumber (min, max, isInteger = 1) {
   }
 }
 
-// Generate a random number with mean and standard deviation
+// Generate a random number by mean and standard deviation
 ///https://gist.github.com/ironwallaby/19d0e12fc43091d455ee
 export function normalizedRandomNumber(mean, std) {
   return Math.floor(mean + 2.0 * std * (Math.random() + Math.random() + Math.random() - 1.5))

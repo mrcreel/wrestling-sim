@@ -16,6 +16,8 @@ for (let index = 1; index <= 4; index++) {
 const match = (first, second) => {
   const w1 = wrestlers[first]
   const w2 = wrestlers[second]
+  let winner=''
+  let loser = ''
   ///
   const sigma = Math.abs((w1.attribute - w2.attribute)/3) > 15 ? Math.abs((w1.attribute - w2.attribute)/3) : 15
 
@@ -32,11 +34,13 @@ const match = (first, second) => {
     if(w1wins){
       w1.stats[1]++
       w1.stats[2] += matchResult[1]
-      verb = 'defeated'
+      winner = w1.id
+      loser = w2.id
     } else {
       w2.stats[1]++
       w2.stats[2] += matchResult[1]
-      verb = 'lost to'
+      winner = w2.id
+      loser = w1.id
     }
     return matchResult
   }
@@ -64,39 +68,28 @@ const match = (first, second) => {
   }
 
   w1.stats[0]++, w2.stats[0]++
-  let verb = ''
   if(w1wins){
     w1.stats[1]++
     w1.stats[2] += matchResult[1]
-    verb = 'defeated'
+    winner = w1.id
+    loser = w2.id
   } else {
     w2.stats[1]++
     w2.stats[2] += matchResult[1]
-    verb = 'lost to'
+    winner = w2.id
+    loser = w1.id
   }
 
-  console.log(`Wrestler ${w1.id} ${verb} Wrestler ${w2.id} via ${matchResult[2]} for ${matchResult[1]} points.`)
+  console.log(`Wrestler ${winner} defeated Wrestler ${loser} via ${matchResult[2]} for ${matchResult[1]} points.`)
 
   return matchResult
 }
 
-let temp=''
-temp = match(0, 1)
-console.log(temp)
-
-temp = match(2, 3)
-console.log(temp)
-
-temp = match(0, 3)
-console.log(temp)
-
-temp = match(1, 2)
-console.log(temp)
-
-temp = match(0, 2)
-console.log(temp)
-
-temp = match(1, 3)
-console.log(temp)
+match(0, 1)
+match(2, 3)
+match(0, 3)
+match(1, 2)
+match(0, 2)
+match(1, 3)
 
 console.log(wrestlers)
