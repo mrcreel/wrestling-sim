@@ -1,7 +1,9 @@
 import {
   randomNumber,
   normalizedRandomNumber,
-  generateWrestler
+  generateWrestler,
+  createTeam,
+  createLeague,
 } from './functions.js'
 
 const wrestlers = []

@@ -36,8 +36,7 @@ export function generateWrestler(index, teamId){
   const weightClasses = initWeightClasses()
   const wrestler = {}
 
-  wrestler.teamId = 100 * teamId
-  wrestler.id = wrestler.teamId + index
+  wrestler.id = 100 * teamId + index
   wrestler.wtClass = index
   wrestler.weight = randomNumber(weightClasses[index-1].minWeight, weightClasses[index-1].maxWeight)
   wrestler.attribute = normalizedRandomNumber(100,15)
@@ -56,11 +55,23 @@ export function createTeam(teamId){
   }
 
   const teamSize = normalizedRandomNumber(10, 1)
-  team.size = teamSize
 
   for (let r = 0; r < 12 - teamSize; r++) {
     const toRemove = randomNumber(0, team.length)
     team.splice(toRemove, 1)
   }
   return team
+}
+
+export function createLeague(numTeams){
+  const teams = []
+  for(let t = 1; t <= numTeams; t++){
+    const team = {}
+    team.id = 100 * t
+    team.wrestlers = createTeam(t)
+
+    console.log(t, team)
+
+    teams.push(team)
+  }
 }
