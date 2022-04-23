@@ -25,26 +25,21 @@ const match = (first, second) => {
   ///
   console.log(`Wrestler ${w1.id} vs Wrestler ${w2.id}`)
 
-  const w1Strongest = w1.attribute > w2.attribute
-  console.log(w1Strongest)
-
   const sigma = Math.abs((w1.attribute - w2.attribute)/3) > 15 ? Math.abs((w1.attribute - w2.attribute)/3) : 15
-  console.log(`sigma: ${sigma}`)
 
   console.log('-----------------')
   const w1Score = normalizedRandomNumber(w1.attribute, sigma)
-  console.log(`w1Score(${w1.attribute}): ${w1Score}`)
+  console.log(`w1Score(${w1.attribute<100?'0':""}${w1.attribute}): ${w1Score < 100 ? '0' : ''}${w1Score}`)
   const w2Score = normalizedRandomNumber(w2.attribute, sigma)
-  console.log(`w2Score(${w2.attribute}): ${w2Score}`)
+  console.log(`w2Score(${w2.attribute<100?'0':""}${w2.attribute}): ${w2Score < 100 ? '0' : ''}${w2Score}`)
 
   const std = Math.abs(w1Score - w2Score)/sigma
-  console.log(`std: ${std}`)
 
   if(w1Score === w2Score) {
     const w1wins = (randomNumber(0,1,0) <= 0.5) ? 1 : 0
     const matchResult = [w1wins, 3, 'Decision ']
-    console.log(matchResult)
-    return ///////TODO!!!!!
+    // console.log(matchResult)
+    return matchResult
   }
 
   let matchResult = []
@@ -69,8 +64,9 @@ const match = (first, second) => {
     }
 
   }
-  console.log(matchResult)
-
+  // console.log(matchResult)
+  return matchResult
 }
 
-match(3, 2)
+const temp = match(3, 2)
+console.log(temp)
