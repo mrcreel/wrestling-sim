@@ -1,50 +1,49 @@
 import {
   randomNumber,
-  normalizedRandomNumber
+  normalizedRandomNumber,
+  generatePlayer
 } from './functions.js'
 
 const wrestlers = []
+let matchResult = []
 
 // Make Test Players
 for (let index = 1; index <= 4; index++) {
-  const wrestler = {}
-
-  wrestler.id = index
-  wrestler.attribute = normalizedRandomNumber(100,15)
-
-  wrestlers.push(wrestler)
+  wrestlers.push(generatePlayer(index))
 }
-
-console.log('**Wrestlers**')
-console.log(wrestlers)
 
 // Test match
 const match = (first, second) => {
   const w1 = wrestlers[first]
   const w2 = wrestlers[second]
   ///
-  console.log(`Wrestler ${w1.id} vs Wrestler ${w2.id}`)
-
   const sigma = Math.abs((w1.attribute - w2.attribute)/3) > 15 ? Math.abs((w1.attribute - w2.attribute)/3) : 15
 
-  console.log('-----------------')
   const w1Score = normalizedRandomNumber(w1.attribute, sigma)
-  console.log(`w1Score(${w1.attribute<100?'0':""}${w1.attribute}): ${w1Score < 100 ? '0' : ''}${w1Score}`)
   const w2Score = normalizedRandomNumber(w2.attribute, sigma)
-  console.log(`w2Score(${w2.attribute<100?'0':""}${w2.attribute}): ${w2Score < 100 ? '0' : ''}${w2Score}`)
 
   const std = Math.abs(w1Score - w2Score)/sigma
 
   if(w1Score === w2Score) {
     const w1wins = (randomNumber(0,1,0) <= 0.5) ? 1 : 0
     const matchResult = [w1wins, 3, 'Decision ']
-    // console.log(matchResult)
+
+    w1.stats[0]++, w2.stats[0]++
+    if(w1wins){
+      w1.stats[1]++
+      w1.stats[2] += matchResult[1]
+      verb = 'defeated'
+    } else {
+      w2.stats[1]++
+      w2.stats[2] += matchResult[1]
+      verb = 'lost to'
+    }
     return matchResult
   }
 
-  let matchResult = []
+
   const w1wins =  w1Score > w2Score ? 1 : 0
-  matchResult = std >= 3 ? [w1wins, 6,''] : std >= 2 ? [w1wins, 5, 'Technical Fall'] : std >= 1 ? [w1wins, 4, 'Major Decision'] : [w1wins, 3, 'Decision ']
+  matchResult = std >= 3 ? [w1wins, 6,''] : std >= 2 ? [w1wins, 5, 'Technical Fall'] : std >= 1 ? [w1wins, 4, 'Major Decision'] : [w1wins, 3, 'Decision']
 
   if(std >= 3){
     const bigWinResult = randomNumber(1,4)
@@ -62,11 +61,42 @@ const match = (first, second) => {
         matchResult[2] = 'Disqualification '
         break;
     }
-
   }
-  // console.log(matchResult)
+
+  w1.stats[0]++, w2.stats[0]++
+  let verb = ''
+  if(w1wins){
+    w1.stats[1]++
+    w1.stats[2] += matchResult[1]
+    verb = 'defeated'
+  } else {
+    w2.stats[1]++
+    w2.stats[2] += matchResult[1]
+    verb = 'lost to'
+  }
+
+  console.log(`Wrestler ${w1.id} ${verb} Wrestler ${w2.id} via ${matchResult[2]} for ${matchResult[1]} points.`)
+
   return matchResult
 }
 
-const temp = match(3, 2)
+let temp=''
+temp = match(0, 1)
 console.log(temp)
+
+temp = match(2, 3)
+console.log(temp)
+
+temp = match(0, 3)
+console.log(temp)
+
+temp = match(1, 2)
+console.log(temp)
+
+temp = match(0, 2)
+console.log(temp)
+
+temp = match(1, 3)
+console.log(temp)
+
+console.log(wrestlers)

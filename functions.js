@@ -12,3 +12,13 @@ export function randomNumber (min, max, isInteger = 1) {
 export function normalizedRandomNumber(mean, std) {
   return Math.floor(mean + 2.0 * std * (Math.random() + Math.random() + Math.random() - 1.5))
 }
+
+export function generatePlayer(index){
+    const wrestler = {}
+
+    wrestler.id = index
+    wrestler.attribute = normalizedRandomNumber(100,15)
+    wrestler.stats = [0, 0, 0] /// [matches, wins, points]
+
+    return wrestler
+}
