@@ -9,11 +9,6 @@ import {
 const wrestlers = []
 let matchResult = []
 
-// Make Test Players
-for (let index = 1; index <= 4; index++) {
-  wrestlers.push(generateWrestler(index, 1))
-}
-
 // Test match
 const match = (first, second) => {
   const w1 = wrestlers[first]
