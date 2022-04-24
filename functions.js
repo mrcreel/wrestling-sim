@@ -41,6 +41,7 @@ export function generateWrestler(index, teamId){
   wrestler.weight = randomNumber(weightClasses[index-1].minWeight, weightClasses[index-1].maxWeight)
   wrestler.attribute = normalizedRandomNumber(100,15)
   wrestler.stats = [0, 0, 0] /// [matches, wins, points]
+  wrestler.grade = randomNumber(1,4)
 
   return wrestler
 }
@@ -70,8 +71,7 @@ export function createLeague(numTeams){
     team.id = 100 * t
     team.wrestlers = createTeam(t)
 
-    console.log(t, team)
-
     teams.push(team)
   }
+  return teams
 }
