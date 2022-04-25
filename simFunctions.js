@@ -37,8 +37,6 @@ export function initWeightClasses() {
 
   const json = JSON.stringify(weightClasses)
   fs.writeFileSync('./data/weightClasses.json', json)
-
-  return weightClasses
 }
 
 export function generateWrestler(teamId, weightClass){
@@ -97,6 +95,5 @@ export function generateLeague(numTeams){
   console.log(league)
   const json = JSON.stringify(league)
   fs.writeFileSync('./data/league.json', json)
-  return league
 }
-generateLeague(8)
+
