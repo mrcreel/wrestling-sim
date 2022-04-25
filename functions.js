@@ -18,7 +18,7 @@ export function normalizedRandomNumber(mean, std) {
 // normalizedRandomNumber(100, 15)
 
 export function padZeros(num, test){
-  return num < test ? '0' + num : num
+  return num < test ? 0 : ''
 }
 
 // Write weight class ranges to a file
@@ -46,23 +46,22 @@ export function initWeightClasses() {
 }
 // initWeightClasses
 
-export function generateResultsMatrix(numArrays) {
+export function generateResultsMatrix(numTeams) {
   const confResultsMatrix = []
 
-  for(let cl = 1; cl <= numArrays; cl++){
+  for(let cl = 1; cl <= 11; cl++){
 
     const classArray = []
-    for(let tr = 0; tr < 8; tr++){
-      // console.log(tr,[(tr+1)*100, (tr+1)*100 + 5, 0, 0, 0])
-      classArray.push([(tr+1)*100, (tr+1)*100 + cl, 0, 0, 0])
+    for(let tr = 1; tr <= numTeams; tr++){
+      classArray.push([tr * 100, tr * 100 + cl, 0, 0, 0, 0])
     }
     // console.log(classArray)
     confResultsMatrix.push(classArray)
   }
-  console.log(confResultsMatrix)
-  return
+  // console.log(confResultsMatrix)
+  return confResultsMatrix
 }
-generateResultsMatrix(11)
+// generateResultsMatrix(11)
 
 export function generateWrestler(teamId, weightClass){
   const wrestler = {}
@@ -127,8 +126,6 @@ export function generateLeague(numTeams){
 export function generateMatch(wrestler1, wrestler2){
   let league = JSON.parse(fs.readFileSync('./data/league.json'))
 
-  const wrestlerMeetResults = []
-
   const w1teamId = Math.floor(wrestler1 / 100)
   const w1id = wrestler1 - w1teamId * 100
   const w1info = league[w1teamId - 1][w1id - 1]
@@ -166,13 +163,17 @@ export function generateMatch(wrestler1, wrestler2){
   let winner = ''
   let loser = ''
   let teamResult = []
+
   if(w1Score > w2Score){
+
     winner = w1info.wrestlerId
     loser = w2info.wrestlerId
-    teamResult = [w1teamId * 100, w2teamId * 100, matchResult[0], matchResult[1], winner, loser]  } else {
+    teamResult = [w1teamId * 100, w2teamId * 100, matchResult[0], matchResult[1], winner, loser]
+
+  } else {
     winner = w2info.wrestlerId
     loser = w1info.wrestlerId
-    teamResult = [w2teamId * 0, w1teamId * 100, matchResult[0], matchResult[1], winner, loser]
+    teamResult = [w2teamId * 100, w1teamId * 100, matchResult[0], matchResult[1], winner, loser]
   }
 
   return teamResult
