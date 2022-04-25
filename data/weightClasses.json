@@ -1,0 +1,14 @@
+[
+  { "weightClass": 1, "minWeight": 93, "maxWeight": 103 },
+  { "weightClass": 2, "minWeight": 93, "maxWeight": 112 },
+  { "weightClass": 3, "minWeight": 93, "maxWeight": 118 },
+  { "weightClass": 4, "minWeight": 113, "maxWeight": 126 },
+  { "weightClass": 5, "minWeight": 119, "maxWeight": 132 },
+  { "weightClass": 6, "minWeight": 127, "maxWeight": 138 },
+  { "weightClass": 7, "minWeight": 133, "maxWeight": 145 },
+  { "weightClass": 8, "minWeight": 139, "maxWeight": 155 },
+  { "weightClass": 9, "minWeight": 146, "maxWeight": 167 },
+  { "weightClass": 10, "minWeight": 156, "maxWeight": 189 },
+  { "weightClass": 11, "minWeight": 168, "maxWeight": 212 },
+  { "weightClass": 12, "minWeight": 190, "maxWeight": 285 }
+]

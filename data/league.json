@@ -1,0 +1,570 @@
+[
+  [
+    {
+      "teamId": 100,
+      "wrestlerId": 101,
+      "weightClass": 1,
+      "weight": 99,
+      "attributeScore": 95
+    },
+    {
+      "teamId": 100,
+      "wrestlerId": 102,
+      "weightClass": 2,
+      "weight": 106,
+      "attributeScore": 78
+    },
+    "",
+    {
+      "teamId": 100,
+      "wrestlerId": 104,
+      "weightClass": 4,
+      "weight": 125,
+      "attributeScore": 100
+    },
+    {
+      "teamId": 100,
+      "wrestlerId": 105,
+      "weightClass": 5,
+      "weight": 130,
+      "attributeScore": 77
+    },
+    "",
+    {
+      "teamId": 100,
+      "wrestlerId": 107,
+      "weightClass": 7,
+      "weight": 133,
+      "attributeScore": 92
+    },
+    {
+      "teamId": 100,
+      "wrestlerId": 108,
+      "weightClass": 8,
+      "weight": 155,
+      "attributeScore": 82
+    },
+    {
+      "teamId": 100,
+      "wrestlerId": 109,
+      "weightClass": 9,
+      "weight": 161,
+      "attributeScore": 72
+    },
+    {
+      "teamId": 100,
+      "wrestlerId": 110,
+      "weightClass": 10,
+      "weight": 158,
+      "attributeScore": 115
+    },
+    {
+      "teamId": 100,
+      "wrestlerId": 111,
+      "weightClass": 11,
+      "weight": 171,
+      "attributeScore": 97
+    },
+    {
+      "teamId": 100,
+      "wrestlerId": 112,
+      "weightClass": 12,
+      "weight": 231,
+      "attributeScore": 93
+    }
+  ],
+  [
+    {
+      "teamId": 200,
+      "wrestlerId": 201,
+      "weightClass": 1,
+      "weight": 96,
+      "attributeScore": 80
+    },
+    {
+      "teamId": 200,
+      "wrestlerId": 202,
+      "weightClass": 2,
+      "weight": 111,
+      "attributeScore": 114
+    },
+    {
+      "teamId": 200,
+      "wrestlerId": 203,
+      "weightClass": 3,
+      "weight": 98,
+      "attributeScore": 68
+    },
+    "",
+    {
+      "teamId": 200,
+      "wrestlerId": 205,
+      "weightClass": 5,
+      "weight": 126,
+      "attributeScore": 100
+    },
+    {
+      "teamId": 200,
+      "wrestlerId": 206,
+      "weightClass": 6,
+      "weight": 138,
+      "attributeScore": 100
+    },
+    {
+      "teamId": 200,
+      "wrestlerId": 207,
+      "weightClass": 7,
+      "weight": 138,
+      "attributeScore": 91
+    },
+    "",
+    "",
+    {
+      "teamId": 200,
+      "wrestlerId": 210,
+      "weightClass": 10,
+      "weight": 166,
+      "attributeScore": 83
+    },
+    "",
+    {
+      "teamId": 200,
+      "wrestlerId": 212,
+      "weightClass": 12,
+      "weight": 196,
+      "attributeScore": 106
+    }
+  ],
+  [
+    {
+      "teamId": 300,
+      "wrestlerId": 301,
+      "weightClass": 1,
+      "weight": 98,
+      "attributeScore": 91
+    },
+    {
+      "teamId": 300,
+      "wrestlerId": 302,
+      "weightClass": 2,
+      "weight": 105,
+      "attributeScore": 108
+    },
+    {
+      "teamId": 300,
+      "wrestlerId": 303,
+      "weightClass": 3,
+      "weight": 116,
+      "attributeScore": 106
+    },
+    "",
+    {
+      "teamId": 300,
+      "wrestlerId": 305,
+      "weightClass": 5,
+      "weight": 119,
+      "attributeScore": 72
+    },
+    {
+      "teamId": 300,
+      "wrestlerId": 306,
+      "weightClass": 6,
+      "weight": 136,
+      "attributeScore": 99
+    },
+    {
+      "teamId": 300,
+      "wrestlerId": 307,
+      "weightClass": 7,
+      "weight": 143,
+      "attributeScore": 89
+    },
+    "",
+    {
+      "teamId": 300,
+      "wrestlerId": 309,
+      "weightClass": 9,
+      "weight": 152,
+      "attributeScore": 91
+    },
+    {
+      "teamId": 300,
+      "wrestlerId": 310,
+      "weightClass": 10,
+      "weight": 168,
+      "attributeScore": 101
+    },
+    {
+      "teamId": 300,
+      "wrestlerId": 311,
+      "weightClass": 11,
+      "weight": 193,
+      "attributeScore": 96
+    },
+    {
+      "teamId": 300,
+      "wrestlerId": 312,
+      "weightClass": 12,
+      "weight": 200,
+      "attributeScore": 84
+    }
+  ],
+  [
+    "",
+    "",
+    {
+      "teamId": 400,
+      "wrestlerId": 403,
+      "weightClass": 3,
+      "weight": 116,
+      "attributeScore": 80
+    },
+    {
+      "teamId": 400,
+      "wrestlerId": 404,
+      "weightClass": 4,
+      "weight": 126,
+      "attributeScore": 80
+    },
+    {
+      "teamId": 400,
+      "wrestlerId": 405,
+      "weightClass": 5,
+      "weight": 124,
+      "attributeScore": 125
+    },
+    {
+      "teamId": 400,
+      "wrestlerId": 406,
+      "weightClass": 6,
+      "weight": 133,
+      "attributeScore": 109
+    },
+    {
+      "teamId": 400,
+      "wrestlerId": 407,
+      "weightClass": 7,
+      "weight": 139,
+      "attributeScore": 91
+    },
+    {
+      "teamId": 400,
+      "wrestlerId": 408,
+      "weightClass": 8,
+      "weight": 153,
+      "attributeScore": 83
+    },
+    {
+      "teamId": 400,
+      "wrestlerId": 409,
+      "weightClass": 9,
+      "weight": 154,
+      "attributeScore": 99
+    },
+    "",
+    {
+      "teamId": 400,
+      "wrestlerId": 411,
+      "weightClass": 11,
+      "weight": 192,
+      "attributeScore": 102
+    },
+    ""
+  ],
+  [
+    {
+      "teamId": 500,
+      "wrestlerId": 501,
+      "weightClass": 1,
+      "weight": 102,
+      "attributeScore": 64
+    },
+    "",
+    {
+      "teamId": 500,
+      "wrestlerId": 503,
+      "weightClass": 3,
+      "weight": 96,
+      "attributeScore": 92
+    },
+    "",
+    {
+      "teamId": 500,
+      "wrestlerId": 505,
+      "weightClass": 5,
+      "weight": 125,
+      "attributeScore": 122
+    },
+    {
+      "teamId": 500,
+      "wrestlerId": 506,
+      "weightClass": 6,
+      "weight": 135,
+      "attributeScore": 92
+    },
+    {
+      "teamId": 500,
+      "wrestlerId": 507,
+      "weightClass": 7,
+      "weight": 133,
+      "attributeScore": 90
+    },
+    {
+      "teamId": 500,
+      "wrestlerId": 508,
+      "weightClass": 8,
+      "weight": 143,
+      "attributeScore": 93
+    },
+    {
+      "teamId": 500,
+      "wrestlerId": 509,
+      "weightClass": 9,
+      "weight": 152,
+      "attributeScore": 106
+    },
+    {
+      "teamId": 500,
+      "wrestlerId": 510,
+      "weightClass": 10,
+      "weight": 166,
+      "attributeScore": 120
+    },
+    {
+      "teamId": 500,
+      "wrestlerId": 511,
+      "weightClass": 11,
+      "weight": 191,
+      "attributeScore": 80
+    },
+    ""
+  ],
+  [
+    {
+      "teamId": 600,
+      "wrestlerId": 601,
+      "weightClass": 1,
+      "weight": 93,
+      "attributeScore": 101
+    },
+    "",
+    {
+      "teamId": 600,
+      "wrestlerId": 603,
+      "weightClass": 3,
+      "weight": 97,
+      "attributeScore": 112
+    },
+    {
+      "teamId": 600,
+      "wrestlerId": 604,
+      "weightClass": 4,
+      "weight": 124,
+      "attributeScore": 101
+    },
+    "",
+    {
+      "teamId": 600,
+      "wrestlerId": 606,
+      "weightClass": 6,
+      "weight": 133,
+      "attributeScore": 66
+    },
+    {
+      "teamId": 600,
+      "wrestlerId": 607,
+      "weightClass": 7,
+      "weight": 138,
+      "attributeScore": 96
+    },
+    {
+      "teamId": 600,
+      "wrestlerId": 608,
+      "weightClass": 8,
+      "weight": 153,
+      "attributeScore": 102
+    },
+    {
+      "teamId": 600,
+      "wrestlerId": 609,
+      "weightClass": 9,
+      "weight": 163,
+      "attributeScore": 92
+    },
+    {
+      "teamId": 600,
+      "wrestlerId": 610,
+      "weightClass": 10,
+      "weight": 159,
+      "attributeScore": 88
+    },
+    {
+      "teamId": 600,
+      "wrestlerId": 611,
+      "weightClass": 11,
+      "weight": 168,
+      "attributeScore": 78
+    },
+    {
+      "teamId": 600,
+      "wrestlerId": 612,
+      "weightClass": 12,
+      "weight": 234,
+      "attributeScore": 77
+    }
+  ],
+  [
+    "",
+    {
+      "teamId": 700,
+      "wrestlerId": 702,
+      "weightClass": 2,
+      "weight": 112,
+      "attributeScore": 122
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 703,
+      "weightClass": 3,
+      "weight": 116,
+      "attributeScore": 74
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 704,
+      "weightClass": 4,
+      "weight": 125,
+      "attributeScore": 110
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 705,
+      "weightClass": 5,
+      "weight": 126,
+      "attributeScore": 104
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 706,
+      "weightClass": 6,
+      "weight": 130,
+      "attributeScore": 92
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 707,
+      "weightClass": 7,
+      "weight": 135,
+      "attributeScore": 81
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 708,
+      "weightClass": 8,
+      "weight": 141,
+      "attributeScore": 103
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 709,
+      "weightClass": 9,
+      "weight": 149,
+      "attributeScore": 99
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 710,
+      "weightClass": 10,
+      "weight": 166,
+      "attributeScore": 111
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 711,
+      "weightClass": 11,
+      "weight": 175,
+      "attributeScore": 88
+    },
+    {
+      "teamId": 700,
+      "wrestlerId": 712,
+      "weightClass": 12,
+      "weight": 217,
+      "attributeScore": 119
+    }
+  ],
+  [
+    {
+      "teamId": 800,
+      "wrestlerId": 801,
+      "weightClass": 1,
+      "weight": 98,
+      "attributeScore": 86
+    },
+    {
+      "teamId": 800,
+      "wrestlerId": 802,
+      "weightClass": 2,
+      "weight": 106,
+      "attributeScore": 102
+    },
+    {
+      "teamId": 800,
+      "wrestlerId": 803,
+      "weightClass": 3,
+      "weight": 95,
+      "attributeScore": 116
+    },
+    {
+      "teamId": 800,
+      "wrestlerId": 804,
+      "weightClass": 4,
+      "weight": 121,
+      "attributeScore": 93
+    },
+    "",
+    {
+      "teamId": 800,
+      "wrestlerId": 806,
+      "weightClass": 6,
+      "weight": 134,
+      "attributeScore": 127
+    },
+    {
+      "teamId": 800,
+      "wrestlerId": 807,
+      "weightClass": 7,
+      "weight": 136,
+      "attributeScore": 93
+    },
+    "",
+    {
+      "teamId": 800,
+      "wrestlerId": 809,
+      "weightClass": 9,
+      "weight": 148,
+      "attributeScore": 112
+    },
+    {
+      "teamId": 800,
+      "wrestlerId": 810,
+      "weightClass": 10,
+      "weight": 172,
+      "attributeScore": 109
+    },
+    {
+      "teamId": 800,
+      "wrestlerId": 811,
+      "weightClass": 11,
+      "weight": 192,
+      "attributeScore": 107
+    },
+    {
+      "teamId": 800,
+      "wrestlerId": 812,
+      "weightClass": 12,
+      "weight": 222,
+      "attributeScore": 84
+    }
+  ]
+]
