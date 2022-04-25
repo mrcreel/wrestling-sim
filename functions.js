@@ -103,7 +103,7 @@ export function generateLeague(numTeams){
   fs.writeFileSync('./data/league.json', JSON.stringify(league))
   return league
 }
-// generateLeague(20)
+generateLeague(20)
 
 // Generate match
 export function generateMatch(w1, w2){
