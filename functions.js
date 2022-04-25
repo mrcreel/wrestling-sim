@@ -105,6 +105,7 @@ export function generateLeague(numTeams){
 }
 // generateLeague(20)
 
+// Generate match
 export function generateMatch(w1, w2){
   let league = JSON.parse(fs.readFileSync('./data/league.json'))
   let teams = JSON.parse(fs.readFileSync('./data/teams.json'))
@@ -151,16 +152,20 @@ export function generateMatch(w1, w2){
 
   let winner = ''
   let loser = ''
+  let teamResult = []
   if(w1Score > w2Score){
     winner = w1info.wrestlerId
     league[w1teamId - 1][w1id - 1].stats.wins++
     league[w1teamId - 1][w1id - 1].stats.points+=matchResult[0]
     loser = w2info.wrestlerId
+    teamResult = [w1teamId, w2teamId, matchResult[0]]
+
   } else {
     winner = w2info.wrestlerId
     league[w2teamId - 1][w2id - 1].stats.wins++
     league[w2teamId - 1][w2id - 1].stats.points+=matchResult[0]
     loser = w1info.wrestlerId
+    teamResult = [w2teamId, w1teamId, matchResult[0]]
   }
 
   console.log(`sigma = ${sigma}`)
@@ -171,9 +176,11 @@ export function generateMatch(w1, w2){
   console.log(`                       |            | Wrestler ${winner} defeats Wrestler ${loser} by ${matchResult[1]}(${matchResult[0]} points)`)
 
   console.log(`w2attributeScore = ${w2info.attributeScore < 100 ? '0' + w2info.attributeScore : w2info.attributeScore} | Score: ${w2Score < 100 ? '0' + w2Score : w2Score} |`)
-
+  console.log(teamResult)
   console.log()
   console.log('w1:', league[w1teamId - 1][w1id - 1].stats)
   console.log('w2:', league[w2teamId - 1][w2id - 1].stats)
+
+  return teamResult
 }
 // generateMatch(112, 2012)
