@@ -46,6 +46,24 @@ export function initWeightClasses() {
 }
 // initWeightClasses
 
+export function generateResultsMatrix(numArrays) {
+  const confResultsMatrix = []
+
+  for(let cl = 1; cl <= numArrays; cl++){
+
+    const classArray = []
+    for(let tr = 0; tr < 8; tr++){
+      // console.log(tr,[(tr+1)*100, (tr+1)*100 + 5, 0, 0, 0])
+      classArray.push([(tr+1)*100, (tr+1)*100 + cl, 0, 0, 0])
+    }
+    // console.log(classArray)
+    confResultsMatrix.push(classArray)
+  }
+  console.log(confResultsMatrix)
+  return
+}
+generateResultsMatrix(11)
+
 export function generateWrestler(teamId, weightClass){
   const wrestler = {}
 
@@ -108,6 +126,8 @@ export function generateLeague(numTeams){
 // Generate match
 export function generateMatch(wrestler1, wrestler2){
   let league = JSON.parse(fs.readFileSync('./data/league.json'))
+
+  const wrestlerMeetResults = []
 
   const w1teamId = Math.floor(wrestler1 / 100)
   const w1id = wrestler1 - w1teamId * 100
@@ -199,6 +219,6 @@ export function generateDualMeet(team1, team2) {
   console.log("==========================================================================================")
   console.log(meetTeamScoring)
 
-  return
+  return meetTeamScoring
 }
-generateDualMeet(1000, 200)
+// generateDualMeet(1000, 200)
