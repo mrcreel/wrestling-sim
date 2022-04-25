@@ -54,9 +54,6 @@ export function generateWrestler(teamId, weightClass){
 
   const attributeScore = normalizedRandomNumber(100, 15)
   wrestler.attributeScore = attributeScore
-  wrestler.stats = {matches: 0, wins: 0, points: 0}
-
-  return wrestler
 }
 //generateWrestler(7,3)
 
@@ -92,14 +89,11 @@ export function generateTeam(id) {
 // Denerate league and write it to a JSON file
 export function generateLeague(numTeams){
   const league = []
-  const teams = []
 
   for(let tId = 1; tId <= numTeams; tId++){
     const team = generateTeam(tId)
     league.push(team)
-    teams.push({id: tId * 100, meets:0, wins: 0, ties:0, pts:0})
   }
-  fs.writeFileSync('./data/teams.json', JSON.stringify(teams))
   fs.writeFileSync('./data/league.json', JSON.stringify(league))
   return league
 }
