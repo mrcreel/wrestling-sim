@@ -12,17 +12,11 @@ import {
   generateDualMeet,
 } from './functions.js'
 
-const resultsMatrix = generateResultsMatrix(8)
-const matchResult = generateMatch(711, 811)
-const matchClass = matchResult[4] - matchResult[0] -1
-const matchTeamW = (matchResult[0]/100)-1
-const matchTeamL = (matchResult[1]/100)-1
+let resultMatrix = generateResultsMatrix(8)
 
-resultsMatrix[matchClass][matchTeamW][2]++
-resultsMatrix[matchClass][matchTeamW][3]++
-resultsMatrix[matchClass][matchTeamW][5]+=matchResult[2]
-resultsMatrix[matchClass][matchTeamL][2]++
-resultsMatrix[matchClass][matchTeamL][4]++
+let dualMeet = generateDualMeet(100, 200, resultMatrix)
+dualMeet = generateDualMeet(300, 700, dualMeet[1])
+dualMeet = generateDualMeet(400, 600, dualMeet[1])
+dualMeet = generateDualMeet(500, 800, dualMeet[1])
 
-
-console.log(resultsMatrix[matchClass])
+console.log(dualMeet[1])
