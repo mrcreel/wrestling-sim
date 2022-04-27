@@ -140,7 +140,7 @@ export function generateMatch(wrestler1, wrestler2, resultMatrix){
   const w1Score = normalizedRandomNumber(w1info.attributeScore, sigma)
   const w2Score = normalizedRandomNumber(w2info.attributeScore, sigma)
   // If tie, rerun match function
-  if(w1Score == w2Score) {generateMatch(wrestler1, wrestler2)}
+  if(w1Score == w2Score) {generateMatch(wrestler1, wrestler2, resultMatrix)}
   const diffs = Math.abs(w1Score - w2Score)/sigma
 
   let matchResult = diffs >= 3 ? [6,''] : diffs >= 2 ? [5, 'Technical Fall'] : diffs >= 1 ? [4, 'Major Decision'] : [3, 'Decision']
@@ -169,27 +169,35 @@ export function generateMatch(wrestler1, wrestler2, resultMatrix){
 
   if(w1Score > w2Score){
 
-    winner = w1info.wrestlerId
-    loser = w2info.wrestlerId
-    teamResult = [w1teamId * 100, w2teamId * 100, matchResult[0], matchResult[1], winner, loser, w1info.weightClass-1 ]
+    try {
+      winner = w1info.wrestlerId
+      loser = w2info.wrestlerId
+      teamResult = [w1teamId * 100, w2teamId * 100, matchResult[0], matchResult[1], winner, loser, w1info.weightClass-1 ]
 
-    resultMatrix[classOfMatch-1][w1teamId-1][2]++
-    resultMatrix[classOfMatch-1][w1teamId-1][3]++
-    resultMatrix[classOfMatch-1][w1teamId-1][5]+=teamResult[2]
-    resultMatrix[classOfMatch-1][w2teamId-1][2]++
-    resultMatrix[classOfMatch-1][w2teamId-1][4]++
-  } else if(w2Score > w1Score) {
+      resultMatrix[classOfMatch-1][w1teamId-1][2]++
+      resultMatrix[classOfMatch-1][w1teamId-1][3]++
+      resultMatrix[classOfMatch-1][w1teamId-1][5]+=teamResult[2]
+      resultMatrix[classOfMatch-1][w2teamId-1][2]++
+      resultMatrix[classOfMatch-1][w2teamId-1][4]++
+    } catch (error) {
+      console.log(error)
+    }
+
+  } else {
+
+    try {
     winner = w2info.wrestlerId
     loser = w1info.wrestlerId
     teamResult = [w2teamId * 100, w1teamId * 100, matchResult[0], matchResult[1], winner, loser, w2info.weightClass-1]
+      resultMatrix[classOfMatch-1][w2teamId-1][2]++
+      resultMatrix[classOfMatch-1][w2teamId-1][3]++
+      resultMatrix[classOfMatch-1][w2teamId-1][5]+=teamResult[2]
+      resultMatrix[classOfMatch-1][w1teamId-1][2]++
+      resultMatrix[classOfMatch-1][w1teamId-1][4]++
+    } catch (error) {
+      console.log(error)
+    }
 
-    resultMatrix[classOfMatch-1][w2teamId-1][2]++
-    resultMatrix[classOfMatch-1][w2teamId-1][3]++
-    resultMatrix[classOfMatch-1][w2teamId-1][5]+=teamResult[2]
-    resultMatrix[classOfMatch-1][w1teamId-1][2]++
-    resultMatrix[classOfMatch-1][w1teamId-1][4]++
-  } else {
-    generateMatch(wrestler1, wrestler2, resultMatrix)
   }
   return [teamResult, resultMatrix]
 }
