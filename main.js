@@ -12,14 +12,38 @@ import {
   generateDualMeet,
 } from './functions.js'
 const resultMatrix = generateResultsMatrix(8)
-// let dualMeet = generateDualMeet(100, 200, resultMatrix)
+// Week One
 let dualMeet = generateDualMeet(100, 200)
 dualMeet = generateDualMeet(300, 700)
 dualMeet = generateDualMeet(400, 600)
 dualMeet = generateDualMeet(500, 800)
-
-console.log(dualMeet[1])
-/*
-
-console.log(dualMeet[1])
-*/
+// Week Two
+dualMeet = generateDualMeet(100, 300)
+dualMeet = generateDualMeet(200, 800)
+dualMeet = generateDualMeet(400, 700)
+dualMeet = generateDualMeet(500, 600)
+// Week Three
+dualMeet = generateDualMeet(100, 400)
+dualMeet = generateDualMeet(200, 300)
+dualMeet = generateDualMeet(500, 700)
+dualMeet = generateDualMeet(600, 800)
+// Week Four
+dualMeet = generateDualMeet(100, 500)
+dualMeet = generateDualMeet(200, 400)
+dualMeet = generateDualMeet(300, 800)
+dualMeet = generateDualMeet(600, 700)
+// Week Five
+dualMeet = generateDualMeet(100, 600)
+dualMeet = generateDualMeet(200, 500)
+dualMeet = generateDualMeet(300, 400)
+dualMeet = generateDualMeet(700, 800)
+// Week Six
+dualMeet = generateDualMeet(100, 700)
+dualMeet = generateDualMeet(200, 600)
+dualMeet = generateDualMeet(300, 500)
+dualMeet = generateDualMeet(400, 800)
+// Week Seven
+dualMeet = generateDualMeet(100, 800)
+dualMeet = generateDualMeet(200, 700)
+dualMeet = generateDualMeet(300, 600)
+dualMeet = generateDualMeet(400, 500)

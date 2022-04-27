@@ -139,6 +139,10 @@ export function generateMatch(wrestler1, wrestler2, resultMatrix){
   const sigma = Math.abs((w1info.attributeScore - w2info.attributeScore)/3) > 15 ? Math.abs((w1info.attributeScore - w2info.attributeScore)/3) : 15
   const w1Score = normalizedRandomNumber(w1info.attributeScore, sigma)
   const w2Score = normalizedRandomNumber(w2info.attributeScore, sigma)
+  // If tie, rerun match function
+  if(w1Score === w2Score) {
+    generateMatch(wrestler1, wrestler2, resultMatrix)
+  }
 
   const diffs = Math.abs(w1Score - w2Score)/sigma
 
@@ -165,11 +169,9 @@ export function generateMatch(wrestler1, wrestler2, resultMatrix){
   let loser = ''
   let teamResult = []
 
-    // If tie, rerun match function
-  if(w1Score === w2Score) {generateMatch(wrestler1, wrestler2, resultMatrix)}
+
 
   if(w1Score > w2Score){
-    try {
       winner = w1info.wrestlerId
       loser = w2info.wrestlerId
       teamResult = [w1teamId * 100, w2teamId * 100, matchResult[0], matchResult[1], winner, loser, w1info.weightClass]
@@ -180,13 +182,7 @@ export function generateMatch(wrestler1, wrestler2, resultMatrix){
       resultMatrix[classOfMatch][w2teamId-1][2]++
       resultMatrix[classOfMatch][w2teamId-1][4]++
 
-    } catch (error) {
-      console.log(error)
-    }
-
   } else {
-
-    try {
       winner = w2info.wrestlerId
       loser = w1info.wrestlerId
       teamResult = [w2teamId * 100, w1teamId * 100, matchResult[0], matchResult[1], winner, loser, w2info.weightClass]
@@ -196,9 +192,6 @@ export function generateMatch(wrestler1, wrestler2, resultMatrix){
       resultMatrix[classOfMatch][w2teamId-1][5]+=teamResult[2]
       resultMatrix[classOfMatch][w1teamId-1][2]++
       resultMatrix[classOfMatch][w1teamId-1][4]++
-    } catch (error) {
-      console.log(error)
-    }
 
   }
   return [teamResult, resultMatrix]
@@ -223,7 +216,7 @@ export function generateDualMeet(team1, team2) {
   meetTeamScoring.push(team2Scoring)
 
   const results = []
-  for(let matchClass = 1; matchClass < 12; matchClass++){
+  for(let matchClass = 0; matchClass < 12; matchClass++){
 
     const undefCheck = team1roster[matchClass].wrestlerId === undefined || team2roster[matchClass].wrestlerId === undefined
     if(!undefCheck){
