@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from "fs"
 import {
   randomNumber,
   normalizedRandomNumber,
@@ -10,10 +10,10 @@ import {
   generateLeague,
   generateMatch,
   generateDualMeet,
-} from './functions.js'
+} from "./functions.js"
 
 const resultMatrix = generateResultMatrix(2)
-generateMatch(1, 2, 1)
+generateMatch(2, 3, 8)
 
 /*
 // Week One
