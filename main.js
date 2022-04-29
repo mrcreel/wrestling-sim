@@ -1,92 +1,54 @@
+import fs from 'fs'
 import {
   randomNumber,
   normalizedRandomNumber,
+  padZeros,
+  generateResultMatrix,
+  initWeightClasses,
   generateWrestler,
-  createTeam,
-  createLeague,
+  generateTeam,
+  generateLeague,
+  generateMatch,
+  generateDualMeet,
 } from './functions.js'
 
-const wrestlers = []
-let matchResult = []
+const resultMatrix = generateResultMatrix(2)
+generateMatch(1, 2, 1)
 
-// Test match
-const match = (first, second) => {
-  const w1 = wrestlers[first]
-  const w2 = wrestlers[second]
-  let winner=''
-  let loser = ''
-  ///
-  const sigma = Math.abs((w1.attribute - w2.attribute)/3) > 15 ? Math.abs((w1.attribute - w2.attribute)/3) : 15
-
-  const w1Score = normalizedRandomNumber(w1.attribute, sigma)
-  const w2Score = normalizedRandomNumber(w2.attribute, sigma)
-
-  const std = Math.abs(w1Score - w2Score)/sigma
-
-  if(w1Score === w2Score) {
-    const w1wins = (randomNumber(0,1,0) <= 0.5) ? 1 : 0
-    const matchResult = [w1wins, 3, 'Decision ']
-
-    w1.stats[0]++, w2.stats[0]++
-    if(w1wins){
-      w1.stats[1]++
-      w1.stats[2] += matchResult[1]
-      winner = w1.id
-      loser = w2.id
-    } else {
-      w2.stats[1]++
-      w2.stats[2] += matchResult[1]
-      winner = w2.id
-      loser = w1.id
-    }
-    return matchResult
-  }
-
-
-  const w1wins =  w1Score > w2Score ? 1 : 0
-  matchResult = std >= 3 ? [w1wins, 6,''] : std >= 2 ? [w1wins, 5, 'Technical Fall'] : std >= 1 ? [w1wins, 4, 'Major Decision'] : [w1wins, 3, 'Decision']
-
-  if(std >= 3){
-    const bigWinResult = randomNumber(1,4)
-    switch (bigWinResult) {
-      case 1:
-        matchResult[2] = 'Fall'
-        break;
-      case 2:
-        matchResult[2] = 'Forfeit'
-        break;
-      case 3:
-        matchResult[2] = 'Default'
-        break;
-      default:
-        matchResult[2] = 'Disqualification '
-        break;
-    }
-  }
-
-  w1.stats[0]++, w2.stats[0]++
-  if(w1wins){
-    w1.stats[1]++
-    w1.stats[2] += matchResult[1]
-    winner = w1.id
-    loser = w2.id
-  } else {
-    w2.stats[1]++
-    w2.stats[2] += matchResult[1]
-    winner = w2.id
-    loser = w1.id
-  }
-
-  console.log(`Wrestler ${winner} defeated Wrestler ${loser} via ${matchResult[2]} for ${matchResult[1]} points.`)
-
-  return matchResult
-}
-
-match(0, 1)
-match(2, 3)
-match(0, 3)
-match(1, 2)
-match(0, 2)
-match(1, 3)
-
-console.log(wrestlers)
+/*
+// Week One
+let dualMeet = generateDualMeet(100, 200)
+dualMeet = generateDualMeet(300, 700)
+dualMeet = generateDualMeet(400, 600)
+dualMeet = generateDualMeet(500, 800)
+// Week Two
+dualMeet = generateDualMeet(100, 300)
+dualMeet = generateDualMeet(200, 800)
+dualMeet = generateDualMeet(400, 700)
+dualMeet = generateDualMeet(500, 600)
+// Week Three
+dualMeet = generateDualMeet(100, 400)
+dualMeet = generateDualMeet(200, 300)
+dualMeet = generateDualMeet(500, 700)
+dualMeet = generateDualMeet(600, 800)
+// Week Four
+dualMeet = generateDualMeet(100, 500)
+dualMeet = generateDualMeet(200, 400)
+dualMeet = generateDualMeet(300, 800)
+dualMeet = generateDualMeet(600, 700)
+// Week Five
+dualMeet = generateDualMeet(100, 600)
+dualMeet = generateDualMeet(200, 500)
+dualMeet = generateDualMeet(300, 400)
+dualMeet = generateDualMeet(700, 800)
+// Week Six
+dualMeet = generateDualMeet(100, 700)
+dualMeet = generateDualMeet(200, 600)
+dualMeet = generateDualMeet(300, 500)
+dualMeet = generateDualMeet(400, 800)
+// Week Seven
+dualMeet = generateDualMeet(100, 800)
+dualMeet = generateDualMeet(200, 700)
+dualMeet = generateDualMeet(300, 600)
+dualMeet = generateDualMeet(400, 500)
+*/
