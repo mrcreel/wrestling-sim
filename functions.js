@@ -45,20 +45,30 @@ export function initWeightClasses() {
 }
 // initWeightClasses
 
-export function generateResultsMatrix(numTeams) {
-  const confResultsMatrix = []
+export function generateResultMatrix(numTeams) {
+  const resultMatrix = []
 
   for(let cl = 1; cl <= 12; cl++){
 
     const classArray = []
     for(let tr = 1; tr <= numTeams; tr++){
-      classArray.push([tr * 100, tr * 100 + cl, 0, 0, 0, 0])
+      const wrestler = {
+        id: tr * 100 + cl,
+        weightClass: cl,
+        teamId: tr * 100,
+        matches: 0,
+        wins: 0,
+        losses: 0,
+        points: 0,
+      }
+
+      classArray.push(wrestler)
     }
 
-    confResultsMatrix.push(classArray)
+   resultMatrix.push(classArray)
   }
-  fs.writeFileSync('./data/classResults.json', JSON.stringify(confResultsMatrix))
-  return
+  fs.writeFileSync('./data/resultMatrix.json', JSON.stringify(resultMatrix))
+  return resultMatrix
 }
 // generateResultsMatrix(11)
 
@@ -122,15 +132,30 @@ export function generateLeague(numTeams){
 // generateLeague(20)
 
 // Generate match
-export function generateMatch(wrestler1, wrestler2, resultMatrix){
+export function generateMatch(team1, team2, matchClass, resultMatrix){
+
+  let arrResultMatrix = []
+
+  if(resultMatrix !== undefined){
+    arrResultMatrix = resultMatrix
+  } else {
+    arrResultMatrix = JSON.parse(fs.readFileSync('./data/resultMatrix.json'))
+  }
+
   let league = JSON.parse(fs.readFileSync('./data/league.json'))
+  console.log(arguments)
 
-  const classOfMatch = wrestler1 - (Math.floor(wrestler1/100)*100) - 1
-  // console.log('args[2]', arguments[2][classOfMatch])
+  for(let x = 0; x < 2; x++){
+    console.log(`Team ${x} Wrassler ${arguments[x]} stats:`)
 
-  const w1teamId = Math.floor(wrestler1 / 100)
-  const w1id = wrestler1 - w1teamId * 100
-  const w1info = league[w1teamId - 1][w1id - 1]
+
+  }
+
+
+  const matchParticipants = []
+
+  return
+
 
   const w2teamId = Math.floor(wrestler2 / 100)
   const w2id = wrestler2 - w2teamId * 100

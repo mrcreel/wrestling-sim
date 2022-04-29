@@ -3,7 +3,7 @@ import {
   randomNumber,
   normalizedRandomNumber,
   padZeros,
-  generateResultsMatrix,
+  generateResultMatrix,
   initWeightClasses,
   generateWrestler,
   generateTeam,
@@ -11,7 +11,11 @@ import {
   generateMatch,
   generateDualMeet,
 } from './functions.js'
-const resultMatrix = generateResultsMatrix(8)
+
+const resultMatrix = generateResultMatrix(2)
+generateMatch(1, 2, 1)
+
+/*
 // Week One
 let dualMeet = generateDualMeet(100, 200)
 dualMeet = generateDualMeet(300, 700)
@@ -47,3 +51,4 @@ dualMeet = generateDualMeet(100, 800)
 dualMeet = generateDualMeet(200, 700)
 dualMeet = generateDualMeet(300, 600)
 dualMeet = generateDualMeet(400, 500)
+*/
