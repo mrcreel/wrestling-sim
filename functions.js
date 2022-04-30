@@ -1,4 +1,4 @@
-import fs from "fs"
+import fs from 'fs'
 
 // Generate random number
 export function randomNumber(min, max, isInteger = 1) {
@@ -43,7 +43,7 @@ export function initWeightClasses() {
     weightClasses.push(classTemplate)
   }
 
-  fs.writeFileSync("./data/weightClasses.json", JSON.stringify(weightClasses))
+  fs.writeFileSync('./data/weightClasses.json', JSON.stringify(weightClasses))
 }
 // initWeightClasses
 
@@ -68,7 +68,7 @@ export function generateResultMatrix(numTeams) {
 
     resultMatrix.push(classArray)
   }
-  fs.writeFileSync("./data/resultMatrix.json", JSON.stringify(resultMatrix))
+  fs.writeFileSync('./data/resultMatrix.json', JSON.stringify(resultMatrix))
   return resultMatrix
 }
 // generateResultsMatrix(11)
@@ -79,7 +79,7 @@ export function generateWrestler(teamId, weightClass) {
   wrestler.teamId = teamId
   wrestler.wrestlerId = teamId + weightClass
 
-  const weightClasses = JSON.parse(fs.readFileSync("./data/weightClasses.json"))
+  const weightClasses = JSON.parse(fs.readFileSync('./data/weightClasses.json'))
   wrestler.weightClass = weightClass
   wrestler.weight = randomNumber(
     weightClasses[weightClass - 1].minWeight,
@@ -116,7 +116,7 @@ export function generateTeam(id) {
   } while (wrestlersToRemove.length < numToRemove)
   // Set removed wrestler element to ''
   wrestlersToRemove.forEach((ele) => {
-    team[ele] = ""
+    team[ele] = ''
   })
   return team
 }
@@ -130,7 +130,7 @@ export function generateLeague(numTeams) {
     const team = generateTeam(tId)
     league.push(team)
   }
-  fs.writeFileSync("./data/league.json", JSON.stringify(league))
+  fs.writeFileSync('./data/league.json', JSON.stringify(league))
   return league
 }
 // generateLeague(20)
@@ -142,131 +142,147 @@ export function generateMatch(team1, team2, matchClass, resultMatrix) {
   if (resultMatrix !== undefined) {
     arrResultMatrix = resultMatrix
   } else {
-    arrResultMatrix = JSON.parse(fs.readFileSync("./data/resultMatrix.json"))
+    arrResultMatrix = JSON.parse(fs.readFileSync('./data/resultMatrix.json'))
   }
-
-  let league = JSON.parse(fs.readFileSync("./data/league.json"))
-  console.log(arguments)
+  let league = JSON.parse(fs.readFileSync('./data/league.json'))
 
   const matchParticipants = []
+
   for (let x = 0; x < 2; x++) {
-    const participant = {}
-    console.log(x)
+    const wrestlerStats = {}
 
-    const stats = arrResultMatrix[arguments[2] - 1][x + 1]
-    const info = league[arguments[x] - 1][arguments[2] - 1]
+    const wrestlerInfo = league[arguments[x] - 1][arguments[2] - 1]
+    wrestlerStats.wrestlerId = wrestlerInfo.wrestlerId
+    wrestlerStats.teamId = arguments[x]
+    wrestlerStats.weightClass = arguments[2]
+    wrestlerStats.weight = wrestlerInfo.weight
+    wrestlerStats.attributeScore = wrestlerInfo.attributeScore
 
-    console.log("stats:", stats)
+    const wrestlerResults = arrResultMatrix[arguments[2] - 1][x]
+    wrestlerStats.matches = wrestlerResults.matches
+    wrestlerStats.wins = wrestlerResults.wins
+    wrestlerStats.losses = wrestlerResults.losses
+    wrestlerStats.points = wrestlerResults.points
 
-    /*
-    console.log("info", info)
-
-    participant.teamId = arguments[x]
-    participant.weightClass = arguments[2]
-    participant.weight = info.weight
-    participant.attributeScore = info.attributeScore
-
-    console.log("participant", participant)
-
-    matchParticipants.push(participant)
-    */
+    matchParticipants.push(wrestlerStats)
   }
-
-  console.log(matchParticipants)
-  return
-
-  const w2teamId = Math.floor(wrestler2 / 100)
-  const w2id = wrestler2 - w2teamId * 100
-  const w2info = league[w2teamId - 1][w2id - 1]
 
   const sigma =
-    Math.abs((w1info.attributeScore - w2info.attributeScore) / 3) > 15
+    Math.abs(
+      (matchParticipants[0].attributeScore -
+        matchParticipants[1].attributeScore) /
+        3
+    ) > 15
       ? Math.abs((w1info.attributeScore - w2info.attributeScore) / 3)
       : 15
-  const w1Score = normalizedRandomNumber(w1info.attributeScore, sigma)
-  const w2Score = normalizedRandomNumber(w2info.attributeScore, sigma)
+
+  console.log('-----------')
+  console.log('Sigma:  ', padZeros(sigma, 100))
+
+  const w0Score = normalizedRandomNumber(
+    matchParticipants[0].attributeScore,
+    sigma
+  )
+  const w1Score = normalizedRandomNumber(
+    matchParticipants[1].attributeScore,
+    sigma
+  )
+
+  console.log('w1Score:', padZeros(w0Score, 100))
+  console.log('w2Score:', padZeros(w1Score, 100))
+
   // If tie, rerun match function
-  if (w1Score === w2Score) {
-    generateMatch(wrestler1, wrestler2, resultMatrix)
+  if (w0Score === w1Score) {
+    console.log('*****TIE*****')
+    generateMatch(team1, team2, matchClass, resultMatrix)
   }
 
-  const diffs = Math.abs(w1Score - w2Score) / sigma
+  const diffs = Math.abs(w0Score - w1Score) / sigma
+  console.log('Diffs:', diffs)
 
-  let matchResult =
+  let matchScore =
     diffs >= 3
-      ? [6, ""]
+      ? [6, '']
       : diffs >= 2
-      ? [5, "Technical Fall"]
+      ? [5, 'Technical Fall']
       : diffs >= 1
-      ? [4, "Major Decision"]
-      : [3, "Decision"]
+      ? [4, 'Major Decision']
+      : [3, 'Decision']
   if (diffs >= 3) {
     const bigWinResult = randomNumber(1, 4)
     switch (bigWinResult) {
       case 1:
-        matchResult[1] = "Fall"
+        matchScore[1] = 'Fall'
         break
       case 2:
-        matchResult[1] = "Forfeit"
+        matchScore[1] = 'Forfeit'
         break
       case 3:
-        matchResult[1] = "Default"
+        matchScore[1] = 'Default'
         break
       default:
-        matchResult[1] = "Disqualification"
+        matchScore[1] = 'Disqualification'
         break
     }
   }
 
-  let winner = ""
-  let loser = ""
-  let teamResult = []
+  let matchResult = {
+    winner: 0,
+    winnerTeam: 0,
+    loser: 0,
+    loserTeam: 0,
+    matchClass,
+    matchScore,
+  }
 
-  if (w1Score > w2Score) {
-    winner = w1info.wrestlerId
-    loser = w2info.wrestlerId
-    teamResult = [
-      w1teamId * 100,
-      w2teamId * 100,
-      matchResult[0],
-      matchResult[1],
-      winner,
-      loser,
-      w1info.weightClass,
-    ]
+  if (w0Score > w1Score) {
+    matchResult.winner = matchParticipants[0].wrestlerId
+    matchResult.winnerTeam = matchParticipants[0].teamId
+    matchResult.loser = matchParticipants[1].wrestlerId
+    matchResult.loserTeam = matchParticipants[1].teamId
 
+    console.log('[**0**]')
+    console.log(arrResultMatrix[matchClass - 1][0])
+    console.log('[**0**]')
+
+    /*
     resultMatrix[classOfMatch][w1teamId - 1][2]++
     resultMatrix[classOfMatch][w1teamId - 1][3]++
-    resultMatrix[classOfMatch][w1teamId - 1][5] += teamResult[2]
+    resultMatrix[classOfMatch][w1teamId - 1][5] += matchResult[2]
     resultMatrix[classOfMatch][w2teamId - 1][2]++
     resultMatrix[classOfMatch][w2teamId - 1][4]++
+    */
+    console.log('-----------')
   } else {
-    winner = w2info.wrestlerId
-    loser = w1info.wrestlerId
-    teamResult = [
-      w2teamId * 100,
-      w1teamId * 100,
-      matchResult[0],
-      matchResult[1],
-      winner,
-      loser,
-      w2info.weightClass,
-    ]
+    matchResult.winner = matchParticipants[1].wrestlerId
+    matchResult.winnerTeam = matchParticipants[1].teamId
+    matchResult.loser = matchParticipants[0].wrestlerId
+    matchResult.loserTeam = matchParticipants[0].teamId
 
+    console.log('[**1**]')
+    console.log(arrResultMatrix[matchClass - 1][1])
+    console.log('[**1**]')
+
+    /*
     resultMatrix[classOfMatch][w2teamId - 1][2]++
     resultMatrix[classOfMatch][w2teamId - 1][3]++
-    resultMatrix[classOfMatch][w2teamId - 1][5] += teamResult[2]
+    resultMatrix[classOfMatch][w2teamId - 1][5] += matchResult[2]
     resultMatrix[classOfMatch][w1teamId - 1][2]++
     resultMatrix[classOfMatch][w1teamId - 1][4]++
+    */
   }
-  return [teamResult, resultMatrix]
+
+  console.log('-----------')
+  console.log('matchResult:', matchResult)
+  return
+  return [matchResult, resultMatrix]
 }
 // generateMatch(106, 206)
 
 export function generateDualMeet(team1, team2) {
   //Import stats
-  const league = JSON.parse(fs.readFileSync("./data/league.json"))
-  const resultMatrix = JSON.parse(fs.readFileSync("./data/classResults.json"))
+  const league = JSON.parse(fs.readFileSync('./data/league.json'))
+  const resultMatrix = JSON.parse(fs.readFileSync('./data/classResults.json'))
 
   const team1roster = league[Math.floor(team1 / 100) - 1]
   const team2roster = league[Math.floor(team2 / 100) - 1]
@@ -332,10 +348,10 @@ export function generateDualMeet(team1, team2) {
     }
   }
   console.log(
-    "=========================================================================================="
+    '=========================================================================================='
   )
   console.log(meetTeamScoring)
-  fs.writeFileSync("./data/classResults.json", JSON.stringify(resultMatrix))
+  fs.writeFileSync('./data/classResults.json', JSON.stringify(resultMatrix))
   return [meetTeamScoring, resultMatrix, results, meetTeamScoring]
 }
 // generateDualMeet(1000, 200)
