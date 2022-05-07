@@ -1,19 +1,10 @@
 {
   "name": "wrestling-sim",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  },
-  "type": "module"
+  "author": "Michael R Creel",
+  "license": "MIT"
 }
