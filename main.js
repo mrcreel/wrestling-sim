@@ -13,7 +13,7 @@ import {
 } from './functions.js'
 
 const resultMatrix = generateResultMatrix(2)
-generateMatch(1, 2, 1)
+generateMatch(1, 2, 2)
 
 /*
 // Week One
