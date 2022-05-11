@@ -13,6 +13,10 @@ const randomNumberFromMeanAndStd_diff = (mean, std_dif) => {
   )
 }
 
+const padZeros = (num, test) => {
+  return num < test ? `0${num}` : num
+}
+
 const weightClasses = [
   { weightClass: 1, minWeight: 94, maxWeight: 106 },
   { weightClass: 2, minWeight: 107, maxWeight: 113 },
@@ -28,12 +32,15 @@ const weightClasses = [
   { weightClass: 12, minWeight: 221, maxWeight: 285 },
 ]
 
+const matchResults = []
+
 const createWrestler = (weightClassIndex, teamIndex) => {
   const wrestler = {}
 
   const weightClass = weightClassIndex + 1
   const teamId = teamIndex + 1
 
+  wrestler.teamId = teamId
   wrestler.wrestlerId = teamId * 100 + weightClass
   wrestler.wrestlerWeight = randomNumberBetween(
     weightClasses[weightClassIndex].minWeight,
@@ -86,23 +93,64 @@ const leagueTeams = createLeague(2)
 const createMatch = (weightClassIndex, teamAid, teamBid) => {
   const matchParticipants = []
   const matchResult = {}
+  matchResult.weightClass = weightClassIndex
 
   const teamAwrestler = leagueTeams[teamAid][weightClassIndex]
   const teamBwrestler = leagueTeams[teamBid][weightClassIndex]
 
-  matchParticipants.teamAwrestler = teamAwrestler
-  matchParticipants.teamBwrestler = teamBwrestler
-
   const abilityDifference = Math.abs(
     teamAwrestler.abilityScore - teamBwrestler.abilityScore
   )
-  const sigma = abilityDifference / 3 < 15 ? 15 : abilityDifference / 3 < 15
 
-  console.log(matchParticipants)
-  console.log(abilityDifference, sigma)
+  if (isNaN(abilityDifference)) {
+    console.log(`No match in Class ${weightClassIndex}`)
+    return /*  */
+  } else {
+    matchParticipants.teamAwrestler = teamAwrestler
+    matchParticipants.teamBwrestler = teamBwrestler
+    console.log(matchParticipants)
+    const sigma = abilityDifference / 3 < 15 ? 15 : abilityDifference / 3 < 15
 
-  // console.log(matchResult)
+    const teamAwrestlerScore = randomNumberFromMeanAndStd_diff(
+      teamAwrestler.abilityScore,
+      sigma
+    )
+    const teamBwrestlerScore = randomNumberFromMeanAndStd_diff(
+      teamBwrestler.abilityScore,
+      sigma
+    )
+
+    if (teamAwrestlerScore === teamBwrestlerScore) {
+      createMatch(weightClassIndex, teamAid, teamBid)
+    }
+
+    console.log(
+      `teamAwrestlerScore(${padZeros(
+        teamAwrestler.abilityScore,
+        100
+      )}): ${padZeros(teamAwrestlerScore, 100)}`
+    )
+    console.log(
+      `teamBwrestlerScore(${padZeros(
+        teamBwrestler.abilityScore,
+        100
+      )}): ${padZeros(teamBwrestlerScore, 100)}`
+    )
+
+    if (teamAwrestlerScore > teamBwrestlerScore) {
+      matchResult.winner = teamAwrestler.teamId
+      matchResult.loser = teamBwrestler.teamId
+    } else {
+      matchResult.winner = teamBwrestler.teamId
+      matchResult.loser = teamAwrestler.teamId
+    }
+
+    matchResults.push(matchResult)
+
+    console.log(matchResult)
+  }
+  console.log(matchResults)
   return matchResult
 }
 
-createMatch(11, 0, 1)
+createMatch(7, 0, 1)
