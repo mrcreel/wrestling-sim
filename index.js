@@ -40,6 +40,7 @@ const createWrestler = (weightClassIndex, teamIndex) => {
     weightClasses[weightClassIndex].maxWeight
   )
   wrestler.abilityScore = randomNumberFromMeanAndStd_diff(100, 15)
+  wrestler.record = { wins: 0, losses: 0 }
 
   return wrestler
 }
@@ -77,17 +78,31 @@ const createLeague = (numberOfTeams) => {
     leagueTeams.push(createTeam(idx))
   }
 
-  console.log(leagueTeams)
   return leagueTeams
 }
 
-const createMatch = (weightClassIndex, homeTeamId, visitingTeamId) => {
+const leagueTeams = createLeague(2)
+
+const createMatch = (weightClassIndex, teamAid, teamBid) => {
+  const matchParticipants = []
   const matchResult = {}
 
-  matchResult.weightClass = weightClassIndex + 1
+  const teamAwrestler = leagueTeams[teamAid][weightClassIndex]
+  const teamBwrestler = leagueTeams[teamBid][weightClassIndex]
 
-  console.log(matchResult)
+  matchParticipants.teamAwrestler = teamAwrestler
+  matchParticipants.teamBwrestler = teamBwrestler
+
+  const abilityDifference = Math.abs(
+    teamAwrestler.abilityScore - teamBwrestler.abilityScore
+  )
+  const sigma = abilityDifference / 3 < 15 ? 15 : abilityDifference / 3 < 15
+
+  console.log(matchParticipants)
+  console.log(abilityDifference, sigma)
+
+  // console.log(matchResult)
   return matchResult
 }
 
-createLeague(8)
+createMatch(11, 0, 1)
